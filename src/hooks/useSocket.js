@@ -1,39 +1,25 @@
 import { useCallback, useEffect, useState } from 'react'
 import Echo from 'laravel-echo'
-// import socketio from 'socket.io-client/dist/socket.io'
-import socketio from 'socket.io-client';//    "socket.io-client": "2.3.0",
+import socketio from 'socket.io-client';
 import { APP_TOKEN } from '@config/settings'
 
-export const useSocket = ({ host   }) => { //  authEndpoint
+export const useSocket = ({ host   }) => { 
     const [socket, setSocket] = useState(null)
     const [online, setOnline] = useState(false)
 
     const connectSocket = useCallback(() => {
         const BearerToken = sessionStorage.getItem(APP_TOKEN)
-
-        console.log("token", `Bearer ${BearerToken}`)
         const socketTemp = new Echo({
             host: host,
             broadcaster: 'socket.io',
             client: socketio,
             csrfToken: null,
-            //  keyPrefix: "laravel_database_"
             transports: ['websocket'],
-           // autoConnect: true,
-            // forceNew: true,
-           // forceNode: true,
-            // authEndpoint: authEndpoint,
-            // key: 'rapio1',
-            // query: {
-            //    'x-token': token
-            // }
-            // encrypted: true,
              auth: {
                 headers: {
                     Authorization: `Bearer ${BearerToken}`,
                     Accept: 'application/json',
                 },
-                // encrypted: true
             }, 
         })
         setSocket(socketTemp)

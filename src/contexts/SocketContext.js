@@ -31,14 +31,12 @@ export const SocketProvider = ({ children }) => {
 
     useEffect(() => {
             socket
-                ?.private(`private-chat.${user?.id}`)// chats.1  channel: public-message-channel
-                ?.listen('.chat-monitor', (payload) => { // ChatMessageCreated MessageEvent
+                ?.private(`private-chat.${user?.id}`)
+                ?.listen('.chat-monitor', (payload) => {
                     console.log(
                         'chat-monitor:',
                         JSON.stringify(payload)
                     )
-                    // const payload = [...messages, {title: 'Título', subtitle: 'Alerta', message: e.message, link:'/' }];
-                    // setMessages(payload);
                      dispatch({
                         type: types.setMessages,
                         payload: payload,
@@ -47,7 +45,6 @@ export const SocketProvider = ({ children }) => {
                     
 
                 })
-        // return () => socket.leave('public-message-channel');
     }, [socket, dispatch])
 
     return (
