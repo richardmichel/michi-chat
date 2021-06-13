@@ -20,7 +20,9 @@ const MessageList = ({
     const userId = user?.id;
 
     const initService = async () => {
+        setMessages([]);
         try {
+           
             const {
                 messages: { data },
             } = await ChatService.getMessages({
@@ -53,7 +55,7 @@ const MessageList = ({
         if(selectedContact?.id){
             initService()
         }
-    }, []);
+    }, [selectedContact?.id]);
 
     useEffect(() => {
         if(socketMessages.length > 0 ){
