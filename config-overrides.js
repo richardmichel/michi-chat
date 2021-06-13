@@ -1,5 +1,4 @@
 const path = require('path');
-const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin')
 const { override, addWebpackAlias } = require('customize-cra')
 
 module.exports = function (config, env) {
